@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogos Cognitivos</title>
+    <title>Jogo da Memória</title>
     <style>
         * {
             margin: 0;
@@ -18,139 +18,49 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
             color: #5a5a5a;
         }
 
         .container {
-            max-width: 1000px;
             width: 100%;
+            max-width: 500px;
             text-align: center;
         }
 
         header {
-            margin: 30px 0;
+            margin: 20px 0;
         }
 
         h1 {
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             color: #88c9d5;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #a8a8a8;
-            margin-bottom: 40px;
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .game-card {
-            background: linear-gradient(135deg, #FFF9F0 0%, #FFE6F0 100%);
-            border-radius: 20px;
-            padding: 30px 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .game-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .game-icon {
-            font-size: 4rem;
             margin-bottom: 20px;
         }
 
-        .game-title {
-            font-size: 1.8rem;
-            color: #88c9d5;
+        .controls {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            border-radius: 15px;
             margin-bottom: 15px;
-        }
-
-        .game-description {
-            color: #8a8a8a;
-            line-height: 1.6;
-        }
-
-        .tagline {
-            font-size: 1.1rem;
-            color: #b8b8b8;
-            font-style: italic;
-            margin: 40px 0;
-            padding: 15px;
-            background-color: rgba(255, 255, 255, 0.6);
-            border-radius: 10px;
-        }
-
-        footer {
-            margin-top: 50px;
-            color: #a8a8a8;
-            font-size: 0.9rem;
-        }
-
-        /* Modal para o jogo da memória */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, #FFF9F0 0%, #FFE6F0 100%);
-            border-radius: 20px;
-            padding: 30px;
-            width: 90%;
-            max-width: 800px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .close-modal {
-            float: right;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #88c9d5;
-        }
-
-        .memory-game-container {
-            margin-top: 20px;
-        }
-
-        /* Estilos para o jogo da memória */
-        .memory-controls {
-            background-color: rgba(255, 255, 255, 0.5);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
         .control-group {
             display: flex;
             flex-direction: column;
             gap: 5px;
+            text-align: left;
         }
 
         label {
@@ -160,10 +70,10 @@
         }
 
         input, select, button {
-            padding: 8px 12px;
+            padding: 10px 12px;
             border: none;
-            border-radius: 5px;
-            font-size: 14px;
+            border-radius: 8px;
+            font-size: 16px;
             background-color: white;
             color: #5a5a5a;
         }
@@ -174,43 +84,51 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            margin-top: 5px;
         }
 
-        button:hover {
+        button:hover, button:active {
             background-color: #FFB6C1;
             transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background-color: #e0e0e0;
+            color: #a8a8a8;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .game-info {
             display: flex;
             justify-content: space-between;
             width: 100%;
-            max-width: 800px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .info-box {
-            background-color: rgba(255, 255, 255, 0.5);
-            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px 15px;
             border-radius: 10px;
             text-align: center;
-            min-width: 120px;
+            flex: 1;
+            margin: 0 5px;
             color: #5a5a5a;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
         }
 
         .memory-game {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            max-width: 800px;
+            gap: 8px;
             width: 100%;
             margin: 0 auto;
         }
 
         .card {
-            height: 120px;
+            aspect-ratio: 3/4;
             background-color: #FFF9F0;
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -230,7 +148,7 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -248,10 +166,14 @@
             object-fit: cover;
         }
 
+        .card-front .emoji {
+            font-size: 2rem;
+        }
+
         .card-back {
             background: linear-gradient(45deg, #FFE6F0, #FFD1DC);
             color: #5a5a5a;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
         }
 
         .matched {
@@ -262,21 +184,21 @@
         .image-preview {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 8px;
+            margin-top: 8px;
             max-width: 100%;
         }
 
         .image-preview img {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             object-fit: cover;
             border-radius: 5px;
             border: 2px solid #FFD1DC;
         }
 
         .message {
-            padding: 10px;
+            padding: 8px;
             border-radius: 5px;
             margin-top: 5px;
             text-align: center;
@@ -293,27 +215,87 @@
             color: #5a9aa8;
         }
 
-        @media (max-width: 768px) {
+        .win-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .win-content {
+            background: linear-gradient(135deg, #FFF9F0 0%, #FFE6F0 100%);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            width: 85%;
+            max-width: 350px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .win-content h2 {
+            font-size: 1.8rem;
+            color: #88c9d5;
+            margin-bottom: 15px;
+        }
+
+        .win-content p {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: #5a5a5a;
+        }
+
+        /* Ajustes para telas muito pequenas */
+        @media (max-width: 350px) {
             .memory-game {
                 grid-template-columns: repeat(3, 1fr);
             }
             
-            .card {
-                height: 100px;
+            .card-front .emoji {
+                font-size: 1.5rem;
+            }
+            
+            .card-back {
+                font-size: 1.2rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
             }
         }
 
-        @media (max-width: 480px) {
+        /* Ajustes para modo paisagem em celulares */
+        @media (max-height: 500px) and (orientation: landscape) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                max-width: 100%;
+            }
+            
+            .controls {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .control-group {
+                flex: 1;
+                min-width: 150px;
+            }
+            
             .memory-game {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(6, 1fr);
             }
             
             .card {
-                height: 80px;
-            }
-            
-            .memory-controls {
-                flex-direction: column;
+                aspect-ratio: 1/1;
             }
         }
     </style>
@@ -321,104 +303,71 @@
 <body>
     <div class="container">
         <header>
-            <h1>Jogos Cognitivos</h1>
-            <p class="subtitle">Escolha um jogo para exercitar sua memória!</p>
+            <h1>Jogo da Memória</h1>
+            <p class="subtitle">Exercite sua mente encontrando os pares!</p>
         </header>
 
-        <div class="tagline">
-            <p>CICÁLIA PALOPPUCVAS CRAICE LEPRES</p>
+        <div class="controls">
+            <div class="control-group">
+                <label for="imageUpload">Carregar Imagens (mínimo 2):</label>
+                <input type="file" id="imageUpload" accept="image/*" multiple>
+                <div class="image-preview" id="imagePreview"></div>
+                <div id="uploadMessage" class="message"></div>
+            </div>
+            
+            <div class="control-group">
+                <label for="gridSize">Tamanho do Tabuleiro:</label>
+                <select id="gridSize">
+                    <option value="4">2x2 (4 cartas)</option>
+                    <option value="6">3x2 (6 cartas)</option>
+                    <option value="8" selected>4x2 (8 cartas)</option>
+                    <option value="12">4x3 (12 cartas)</option>
+                    <option value="16">4x4 (16 cartas)</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="theme">Tema (se não usar imagens próprias):</label>
+                <select id="theme">
+                    <option value="default">Padrão</option>
+                    <option value="nature">Natureza</option>
+                    <option value="animals">Animais</option>
+                    <option value="food">Comida</option>
+                </select>
+            </div>
+            
+            <button id="startGame" disabled>Iniciar Jogo</button>
+            <button id="resetGame">Reiniciar</button>
         </div>
-
-        <div class="games-grid">
-            <div class="game-card" id="wordSearch">
-                <div class="game-icon">🔍</div>
-                <h2 class="game-title">CAÇA PALAVRAS</h2>
-                <p class="game-description">Encontre palavras escondidas em uma grade de letras. Um ótimo exercício para atenção e percepção visual.</p>
+        
+        <div class="game-info">
+            <div class="info-box">
+                <p>Movimentos: <span id="moves">0</span></p>
             </div>
-
-            <div class="game-card" id="ticTacToe">
-                <div class="game-icon">⭕</div>
-                <h2 class="game-title">JOGO DA VELHA</h2>
-                <p class="game-description">O clássico jogo de estratégia para dois jogadores. Perfeito para desenvolver pensamento lógico.</p>
+            <div class="info-box">
+                <p>Pares: <span id="pairs">0</span>/<span id="totalPairs">0</span></p>
             </div>
-
-            <div class="game-card" id="memoryGame">
-                <div class="game-icon">🧠</div>
-                <h2 class="game-title">JOGO DA MEMÓRIA</h2>
-                <p class="game-description">Encontre os pares de cartas combinando. Excelente para treinar a memória e concentração.</p>
+            <div class="info-box">
+                <p>Tempo: <span id="timer">0</span>s</p>
             </div>
         </div>
-
-        <footer>
-            <p>Exercite sua mente regularmente para manter o cérebro saudável!</p>
-        </footer>
+        
+        <div class="memory-game" id="memoryGame"></div>
     </div>
-
-    <!-- Modal para o Jogo da Memória -->
-    <div class="modal" id="memoryModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeMemoryModal">&times;</span>
-            <h2>Jogo da Memória Personalizável</h2>
-            
-            <div class="memory-controls">
-                <div class="control-group">
-                    <label for="imageUpload">Carregar Imagens (mínimo 2):</label>
-                    <input type="file" id="imageUpload" accept="image/*" multiple>
-                    <div class="image-preview" id="imagePreview"></div>
-                    <div id="uploadMessage" class="message"></div>
-                </div>
-                
-                <div class="control-group">
-                    <label for="gridSize">Tamanho do Tabuleiro:</label>
-                    <select id="gridSize">
-                        <option value="4">2x2 (4 cartas)</option>
-                        <option value="6">3x2 (6 cartas)</option>
-                        <option value="8" selected>4x2 (8 cartas)</option>
-                        <option value="12">4x3 (12 cartas)</option>
-                        <option value="16">4x4 (16 cartas)</option>
-                    </select>
-                </div>
-                
-                <div class="control-group">
-                    <label for="theme">Tema (se não usar imagens próprias):</label>
-                    <select id="theme">
-                        <option value="default">Padrão</option>
-                        <option value="nature">Natureza</option>
-                        <option value="animals">Animais</option>
-                        <option value="food">Comida</option>
-                    </select>
-                </div>
-                
-                <button id="startGame" disabled>Iniciar Jogo</button>
-                <button id="resetGame">Reiniciar</button>
-            </div>
-            
-            <div class="game-info">
-                <div class="info-box">
-                    <p>Movimentos: <span id="moves">0</span></p>
-                </div>
-                <div class="info-box">
-                    <p>Pares Encontrados: <span id="pairs">0</span>/<span id="totalPairs">0</span></p>
-                </div>
-                <div class="info-box">
-                    <p>Tempo: <span id="timer">0</span>s</p>
-                </div>
-            </div>
-            
-            <div class="memory-game-container">
-                <div class="memory-game" id="memoryGameBoard"></div>
-            </div>
+    
+    <div class="win-message" id="winMessage">
+        <div class="win-content">
+            <h2>Parabéns!</h2>
+            <p>Você completou o jogo!</p>
+            <p>Movimentos: <span id="finalMoves">0</span></p>
+            <p>Tempo: <span id="finalTime">0</span> segundos</p>
+            <button id="playAgain">Jogar Novamente</button>
         </div>
     </div>
 
     <script>
-        // Elementos do DOM para navegação
-        const memoryGameCard = document.getElementById('memoryGame');
-        const memoryModal = document.getElementById('memoryModal');
-        const closeMemoryModal = document.getElementById('closeMemoryModal');
-
-        // Elementos do DOM para o jogo da memória
-        const memoryGameBoard = document.getElementById('memoryGameBoard');
+        // Elementos do DOM
+        const memoryGame = document.getElementById('memoryGame');
         const imageUpload = document.getElementById('imageUpload');
         const imagePreview = document.getElementById('imagePreview');
         const uploadMessage = document.getElementById('uploadMessage');
@@ -430,6 +379,10 @@
         const pairsDisplay = document.getElementById('pairs');
         const totalPairsDisplay = document.getElementById('totalPairs');
         const timerDisplay = document.getElementById('timer');
+        const winMessage = document.getElementById('winMessage');
+        const finalMoves = document.getElementById('finalMoves');
+        const finalTime = document.getElementById('finalTime');
+        const playAgain = document.getElementById('playAgain');
 
         // Variáveis do jogo
         let cards = [];
@@ -446,48 +399,29 @@
         const defaultImages = {
             default: [
                 '😀', '🎮', '🚀', '⭐',
-                '🐱', '🐶', '🐼', '🐯',
-                '🍎', '🍕', '🍦', '🍩',
-                '⚽', '🎸', '🎨', '📚'
+                '🐱', '🐶', '🐼', '🐯'
             ],
             nature: [
                 '🌲', '🌻', '🌊', '⛰️',
-                '🌈', '☀️', '🌙', '⭐',
-                '🌸', '🍂', '❄️', '🌧️',
-                '🍀', '🌵', '🐚', '🌺'
+                '🌈', '☀️', '🌙', '⭐'
             ],
             animals: [
                 '🐶', '🐱', '🐭', '🐹',
-                '🐰', '🦊', '🐻', '🐼',
-                '🐨', '🐯', '🦁', '🐮',
-                '🐷', '🐸', '🐵', '🐔'
+                '🐰', '🦊', '🐻', '🐼'
             ],
             food: [
                 '🍎', '🍌', '🍇', '🍓',
-                '🍕', '🍔', '🌭', '🍿',
-                '🍩', '🍪', '🍰', '🧁',
-                '🍦', '🍫', '🍬', '🍭'
+                '🍕', '🍔', '🌭', '🍿'
             ]
         };
-
-        // Event Listeners para navegação
-        memoryGameCard.addEventListener('click', () => {
-            memoryModal.style.display = 'flex';
-        });
-
-        closeMemoryModal.addEventListener('click', () => {
-            memoryModal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (event) => {
-            if (event.target === memoryModal) {
-                memoryModal.style.display = 'none';
-            }
-        });
 
         // Event Listeners para o jogo da memória
         startGame.addEventListener('click', initializeGame);
         resetGame.addEventListener('click', resetGameState);
+        playAgain.addEventListener('click', () => {
+            winMessage.style.display = 'none';
+            resetGameState();
+        });
 
         imageUpload.addEventListener('change', handleImageUpload);
 
@@ -596,9 +530,9 @@
 
         // Criar o tabuleiro do jogo
         function createBoard(size) {
-            memoryGameBoard.innerHTML = '';
+            memoryGame.innerHTML = '';
             const columns = Math.sqrt(size);
-            memoryGameBoard.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+            memoryGame.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
             
             for (let i = 0; i < size; i++) {
                 const card = document.createElement('div');
@@ -616,8 +550,10 @@
                     img.alt = `Imagem ${i}`;
                     cardFront.appendChild(img);
                 } else {
-                    cardFront.textContent = cards[i];
-                    cardFront.style.fontSize = '2.5rem';
+                    const emojiSpan = document.createElement('span');
+                    emojiSpan.textContent = cards[i];
+                    emojiSpan.classList.add('emoji');
+                    cardFront.appendChild(emojiSpan);
                 }
                 
                 const cardBack = document.createElement('div');
@@ -628,7 +564,7 @@
                 card.appendChild(cardBack);
                 
                 card.addEventListener('click', flipCard);
-                memoryGameBoard.appendChild(card);
+                memoryGame.appendChild(card);
             }
         }
 
@@ -709,15 +645,15 @@
             clearInterval(timerInterval);
             gameStarted = false;
             
-            setTimeout(() => {
-                alert(`Parabéns! Você completou o jogo em ${timer} segundos e ${moves} movimentos!`);
-            }, 500);
+            finalMoves.textContent = moves;
+            finalTime.textContent = timer;
+            winMessage.style.display = 'flex';
         }
 
         // Reiniciar o jogo
         function resetGameState() {
             clearInterval(timerInterval);
-            memoryGameBoard.innerHTML = '';
+            memoryGame.innerHTML = '';
             flippedCards = [];
             matchedPairs = 0;
             moves = 0;
