@@ -18,7 +18,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 15px;
+            padding: 20px;
             color: #5a5a5a;
             overflow-x: hidden;
         }
@@ -48,110 +48,179 @@
         }
 
         .controls {
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 15px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF9F0 100%);
+            padding: 20px;
+            border-radius: 25px;
+            margin-bottom: 20px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            gap: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             animation: slideInUp 0.8s ease;
+            border: 2px solid rgba(255, 255, 255, 0.8);
         }
 
         .control-group {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 8px;
             text-align: left;
         }
 
         label {
-            font-weight: bold;
-            font-size: 14px;
-            color: #88c9d5;
+            font-weight: 600;
+            font-size: 15px;
+            color: #7BB5C3;
+            margin-left: 5px;
         }
 
         input, select, button {
-            padding: 10px 12px;
+            padding: 14px 18px;
             border: none;
-            border-radius: 8px;
+            border-radius: 18px;
             font-size: 16px;
             background-color: white;
             color: #5a5a5a;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
-        button {
-            background-color: #FFD1DC;
-            color: #5a5a5a;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 5px;
+        input:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(136, 201, 213, 0.3);
+        }
+
+        /* Estilo personalizado para o input de arquivo */
+        .file-input-container {
             position: relative;
-            overflow: hidden;
+            display: inline-block;
+            width: 100%;
         }
 
-        button:hover, button:active {
-            background-color: #FFB6C1;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        button:disabled {
-            background-color: #e0e0e0;
-            color: #a8a8a8;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        button::after {
-            content: '';
+        .file-input-container input[type="file"] {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
+            left: 0;
+            top: 0;
             opacity: 0;
-            border-radius: 100%;
-            transform: scale(1, 1) translate(-50%);
-            transform-origin: 50% 50%;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
         }
 
-        button:focus:not(:active)::after {
-            animation: ripple 1s ease-out;
+        .file-input-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #A8E6CF 0%, #88c9d5 100%);
+            color: white;
+            padding: 14px 18px;
+            border-radius: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(136, 201, 213, 0.3);
+        }
+
+        .file-input-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(136, 201, 213, 0.4);
+        }
+
+        .file-input-button:active {
+            transform: translateY(-1px);
+        }
+
+        .file-input-button i {
+            font-size: 18px;
+        }
+
+        /* Botões principais */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .action-buttons button {
+            flex: 1;
+            font-weight: 600;
+            padding: 16px;
+        }
+
+        #startGame {
+            background: linear-gradient(135deg, #FFD1DC 0%, #FFB6C1 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 182, 193, 0.4);
+        }
+
+        #startGame:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 182, 193, 0.5);
+        }
+
+        #resetGame {
+            background: linear-gradient(135deg, #A8E6CF 0%, #88c9d5 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(136, 201, 213, 0.4);
+        }
+
+        #resetGame:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(136, 201, 213, 0.5);
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2388c9d5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px;
+            padding-right: 45px;
         }
 
         .game-info {
             display: flex;
             justify-content: space-between;
             width: 100%;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             animation: fadeIn 1s ease;
         }
 
         .info-box {
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 10px 15px;
-            border-radius: 10px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF9F0 100%);
+            padding: 15px 10px;
+            border-radius: 20px;
             text-align: center;
             flex: 1;
-            margin: 0 5px;
+            margin: 0 6px;
             color: #5a5a5a;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
             transition: transform 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.8);
         }
 
         .info-box:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+        }
+
+        .info-box p:first-child {
+            font-weight: 600;
+            color: #7BB5C3;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .info-box p:last-child {
+            font-size: 20px;
+            font-weight: 700;
+            color: #88c9d5;
         }
 
         .memory-game {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
+            gap: 10px;
             width: 100%;
             margin: 0 auto;
             animation: zoomIn 0.8s ease;
@@ -160,7 +229,7 @@
         .card {
             aspect-ratio: 3/4;
             background-color: #FFF9F0;
-            border-radius: 8px;
+            border-radius: 16px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -168,7 +237,7 @@
             transform-style: preserve-3d;
             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
         }
 
         .card.flipped {
@@ -185,7 +254,7 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 8px;
+            border-radius: 16px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -193,8 +262,9 @@
         }
 
         .card-front {
-            background-color: #FFF9F0;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF9F0 100%);
             transform: rotateY(180deg);
+            border: 2px solid rgba(255, 255, 255, 0.9);
         }
 
         .card-front img {
@@ -209,7 +279,7 @@
         }
 
         .card-front .emoji {
-            font-size: 2rem;
+            font-size: 2.2rem;
             transition: transform 0.3s ease;
         }
 
@@ -218,9 +288,10 @@
         }
 
         .card-back {
-            background: linear-gradient(45deg, #FFE6F0, #FFD1DC);
-            color: #5a5a5a;
-            font-size: 1.5rem;
+            background: linear-gradient(135deg, #FFE6F0 0%, #FFD1DC 100%);
+            color: #FFFFFF;
+            font-size: 1.8rem;
+            border: 2px solid rgba(255, 255, 255, 0.9);
         }
 
         .card-back::before {
@@ -231,19 +302,21 @@
         .image-preview {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 10px;
+            margin-top: 12px;
             max-width: 100%;
+            justify-content: center;
         }
 
         .image-preview img {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             object-fit: cover;
-            border-radius: 5px;
-            border: 2px solid #FFD1DC;
+            border-radius: 14px;
+            border: 3px solid #FFD1DC;
             transition: transform 0.3s ease;
             cursor: pointer;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
         }
 
         .image-preview img:hover {
@@ -251,22 +324,24 @@
         }
 
         .message {
-            padding: 8px;
-            border-radius: 5px;
-            margin-top: 5px;
+            padding: 12px;
+            border-radius: 14px;
+            margin-top: 8px;
             text-align: center;
             font-size: 14px;
             animation: fadeIn 0.5s ease;
         }
 
         .error {
-            background-color: rgba(255, 182, 193, 0.3);
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.3) 0%, rgba(212, 106, 126, 0.2) 100%);
             color: #d46a7e;
+            border: 1px solid rgba(212, 106, 126, 0.3);
         }
 
         .success {
-            background-color: rgba(136, 201, 213, 0.3);
+            background: linear-gradient(135deg, rgba(136, 201, 213, 0.3) 0%, rgba(90, 154, 168, 0.2) 100%);
             color: #5a9aa8;
+            border: 1px solid rgba(90, 154, 168, 0.3);
         }
 
         .win-message {
@@ -285,14 +360,15 @@
         }
 
         .win-content {
-            background: linear-gradient(135deg, #FFF9F0 0%, #FFE6F0 100%);
-            padding: 25px;
-            border-radius: 15px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF9F0 100%);
+            padding: 30px;
+            border-radius: 25px;
             text-align: center;
             width: 85%;
             max-width: 350px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
             animation: bounceIn 0.8s ease;
+            border: 2px solid rgba(255, 255, 255, 0.9);
         }
 
         .win-content h2 {
@@ -305,6 +381,21 @@
             font-size: 1rem;
             margin-bottom: 15px;
             color: #5a5a5a;
+        }
+
+        #playAgain {
+            background: linear-gradient(135deg, #FFD1DC 0%, #FFB6C1 100%);
+            color: white;
+            font-weight: 600;
+            padding: 14px 25px;
+            border-radius: 18px;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(255, 182, 193, 0.4);
+        }
+
+        #playAgain:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 182, 193, 0.5);
         }
 
         .confetti {
@@ -377,21 +468,6 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
-        }
-
-        @keyframes ripple {
-            0% {
-                transform: scale(0, 0);
-                opacity: 1;
-            }
-            20% {
-                transform: scale(25, 25);
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                transform: scale(40, 40);
-            }
         }
 
         @keyframes matchedAnimation {
@@ -469,7 +545,12 @@
         <div class="controls">
             <div class="control-group">
                 <label for="imageUpload">Carregar Imagens (opcional):</label>
-                <input type="file" id="imageUpload" accept="image/*" multiple>
+                <div class="file-input-container">
+                    <input type="file" id="imageUpload" accept="image/*" multiple>
+                    <div class="file-input-button">
+                        <i>📁</i> Escolher Imagens
+                    </div>
+                </div>
                 <div class="image-preview" id="imagePreview"></div>
                 <div id="uploadMessage" class="message"></div>
             </div>
@@ -497,19 +578,24 @@
                 </select>
             </div>
             
-            <button id="startGame">Iniciar Jogo</button>
-            <button id="resetGame">Reiniciar</button>
+            <div class="action-buttons">
+                <button id="startGame">Iniciar Jogo</button>
+                <button id="resetGame">Reiniciar</button>
+            </div>
         </div>
         
         <div class="game-info">
             <div class="info-box">
-                <p>Movimentos: <span id="moves">0</span></p>
+                <p>Movimentos</p>
+                <p id="moves">0</p>
             </div>
             <div class="info-box">
-                <p>Pares: <span id="pairs">0</span>/<span id="totalPairs">0</span></p>
+                <p>Pares</p>
+                <p><span id="pairs">0</span>/<span id="totalPairs">0</span></p>
             </div>
             <div class="info-box">
-                <p>Tempo: <span id="timer">0</span>s</p>
+                <p>Tempo</p>
+                <p id="timer">0s</p>
             </div>
         </div>
         
